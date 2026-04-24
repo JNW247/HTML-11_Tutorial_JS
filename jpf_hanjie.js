@@ -75,6 +75,9 @@ function init() {
        }
    
    setupPuzzle();
+
+   // Add an event listener for the mouseup event
+   document.addEventListener("mouseup", endBackground);
 }
 
 var cellBackground;
@@ -119,7 +122,24 @@ function setupPuzzle() {
 function setBackground(e) {
    cellBackground = "rgb(101, 101, 101)";
    e.target.style.backgroundColor = cellBackground;
+
+   //Create an event listener for every puzzle cell
+   for (var i = 0; i < puzzleCells.length; i++) {
+      puzzleCells[i].addEventListener("mouseenter", extendBackground);
+   }
 }
+
+function extendBackground(e) {
+   e.target.style.backgroundColor = cellBackground;
+}
+
+function endBackground() {
+   // Remove the event listener for every puzzle cell
+   for (var i = 0; i < puzzleCells.length; i++) { 
+      puzzleCells[i].removeEventListener("mouseenter", extendBackground);
+   }
+}
+
 
 /* ================================================================= */
 
