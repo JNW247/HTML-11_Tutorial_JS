@@ -78,6 +78,16 @@ function init() {
 
    // Add an event listener for the mouseup event
    document.addEventListener("mouseup", endBackground);
+
+   // Add an event listener to the Show Solution button
+   document.getElementById("solve").addEventListener("click", 
+      function() {
+         //Remove the inline backgroundColor style from each cell
+         for (var i = 0; i < puzzleCells.length; i++) {
+            puzzleCells[i].style.backgroundColor = "";
+         }
+      }
+   );
 }
 
 var cellBackground;
