@@ -116,17 +116,25 @@ function setupPuzzle() {
 
       // set the cell background color in response to the mousedown event
       puzzleCells[i].onmousedown = setBackground;
+
+      // Use a pencil image as the cursor
+      puzzleCells[i].style.cursor = " url(jpf_pencil.png), pointer";
    }
 }
 
 function setBackground(e) {
+   var cursorType;
+
    // Set the background based on the keyboard key
    if (e.shiftKey) {
       cellBackground = "rgb(233, 207, 29)";
+      cursorType = "url(jpf_eraser.png), cell";
    } else if (e.altKey) {
       cellBackground = "rgb(255, 255, 255)";
+      cursorType = "url(jpf_cross.png), crosshair";
    } else {
       cellBackground = "rgb(101, 101, 101)";
+      cursorType = "url(jpf_pencil.png), pointer";
    }
 
    e.target.style.backgroundColor = cellBackground;
@@ -134,6 +142,7 @@ function setBackground(e) {
    //Create an event listener for every puzzle cell
    for (var i = 0; i < puzzleCells.length; i++) {
       puzzleCells[i].addEventListener("mouseenter", extendBackground);
+      puzzleCells[i].style.cursor = cursorType;
    }
 
    // Prevent the default action of selecting table text
