@@ -93,27 +93,28 @@ function init() {
 var cellBackground;
 
 function swapPuzzle(e) {
-   var puzzleID = e.target.id;
+   if (confirm("You will lose all of your work on the puzzle! Continue?")) {
 
-   var puzzleTitle = e.target.value;
-   document.getElementById("puzzleTitle").innerHTML = puzzleTitle;
+      var puzzleID = e.target.id;
+      var puzzleTitle = e.target.value;
+      document.getElementById("puzzleTitle").innerHTML = puzzleTitle;
 
-   switch (puzzleID) {
-      case "puzzle1":
-         document.getElementById("puzzle").innerHTML = 
-         drawPuzzle(puzzle1Hint, puzzle1Rating, puzzle1);
-         break;
-      case "puzzle2":
-         document.getElementById("puzzle").innerHTML = 
-         drawPuzzle(puzzle2Hint, puzzle2Rating, puzzle2);
-         break;
-      case "puzzle3":
-         document.getElementById("puzzle").innerHTML = 
-         drawPuzzle(puzzle3Hint, puzzle3Rating, puzzle3);
-         break;
+      switch (puzzleID) {
+         case "puzzle1":
+            document.getElementById("puzzle").innerHTML = 
+            drawPuzzle(puzzle1Hint, puzzle1Rating, puzzle1);
+            break;
+         case "puzzle2":
+            document.getElementById("puzzle").innerHTML = 
+            drawPuzzle(puzzle2Hint, puzzle2Rating, puzzle2);
+            break;
+         case "puzzle3":
+            document.getElementById("puzzle").innerHTML = 
+            drawPuzzle(puzzle3Hint, puzzle3Rating, puzzle3);
+            break;
+      }
+      setupPuzzle();
    }
-
-   setupPuzzle();
 }       
 
 function setupPuzzle() {
@@ -167,7 +168,25 @@ function setupPuzzle() {
             }, 500);
       }
    );
+   
+   // Check the puzzle solution
+   document.getElementById("hanjieGrid").addEventListener("mouseup",
+   function() {
+      var solved = true;
+      for (var i = 0; i < puzzleCells.length; i++) {
+         if ((puzzleCells[i].className === "filled" &&
+            puzzleCells[i].style.backgroundColor !== "rgb(101, 101, 101)")
+            ||
+            (puzzleCells[i].className === "empty" && puzzleCells[i].style.backgroundColor === "rgb(101, 101, 101)")) 
+            {
+               solved = false;
+               break;
+            } 
+      }
+         if  (solved) alert("You Solved the Puzzle");
+   });
 }
+
 
 function setBackground(e) {
    var cursorType;
@@ -208,7 +227,7 @@ function endBackground() {
 }
 
 
-/* ================================================================= */
+/* ======================================================================================== */
 
 
 
