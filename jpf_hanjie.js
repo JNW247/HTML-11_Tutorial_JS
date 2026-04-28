@@ -151,6 +151,20 @@ function setupPuzzle() {
                empty[i].style.backgroundColor = "rgb(255, 101, 101)";
             }
          }
+
+         // Remove the hints  after 0.5 seconds
+         setTimeout(
+            function() {
+               // Change pink cells to white and red cells to gray
+               for (var i = 0; i < puzzleCells.length; i++) {
+                  if (puzzleCells[i].style.backgroundColor === "rgb(255, 211, 211)") {
+                     puzzleCells[i].style.backgroundColor = "rgb(255, 255, 255)";
+                  }
+                  if (puzzleCells[i].style.backgroundColor === "rgb(255, 101, 101)") {
+                     puzzleCells[i].style.backgroundColor = "rgb(101, 101, 101)";
+                  }
+               }
+            }, 500);
       }
    );
 }
