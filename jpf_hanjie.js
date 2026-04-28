@@ -130,6 +130,29 @@ function setupPuzzle() {
       // Use a pencil image as the cursor
       puzzleCells[i].style.cursor = " url(jpf_pencil.png), pointer";
    }
+
+   // Create object collections of filled and empty cells
+   var filled = document.querySelectorAll("table#hanjieGrid td.filled");
+   var empty = document.querySelectorAll("table#hanjieGrid td.empty");
+
+   // Create an event listener to highlight incorrect cells
+   document.getElementById("peek").addEventListener("click",
+      function() {
+         // Display incorrect white cells in pink
+         for (var i = 0; i < filled.length; i++) {
+            if (filled[i].style.backgroundColor === "rgb(255, 255, 255)"){
+               filled[i].style.backgroundColor = "rgb(255, 211, 211)";
+            }  
+         }
+
+         // Display incorrect gray cells in red
+         for (var i = 0; i < empty.length; i++) {
+            if (empty[i].style.backgroundColor === "rgb(101, 101, 101)"){
+               empty[i].style.backgroundColor = "rgb(255, 101, 101)";
+            }
+         }
+      }
+   );
 }
 
 function setBackground(e) {
